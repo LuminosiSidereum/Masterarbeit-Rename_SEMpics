@@ -1,4 +1,5 @@
 import os
+import sys
 from pathlib import Path
 
 def DatumEingeben()->str:
@@ -43,6 +44,12 @@ if __name__=="__main__":
 
     aufnahmedatum:str = DatumEingeben()
 
+    # Pfad der aktuellen Python-Datei ermitteln
+    script_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
+
+    # Setze das Arbeitsverzeichnis auf den Ordner der Python-Datei (normalerweise ging das immer ohne, aber anscheinend nicht mehr)
+    os.chdir(script_dir)
+    
     if modus == "0":
         einfuegenDatum(aufnahmedatum)
         try:
