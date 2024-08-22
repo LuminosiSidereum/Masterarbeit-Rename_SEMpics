@@ -3,9 +3,13 @@ from pathlib import Path
 
 def DatumEingeben()->str:
     aufnahmedatum:str = input("Bitte geben Sie das Datum (YYMMDD), an dem die REM-Aufnahmen gemacht wurden, ein: ")
-    while len(aufnahmedatum) != 6:
-        print("Das angegebene Datum entspricht nicht dem Foramt (YYMMDD)!")
-        aufnahmedatum = input("Aufnamedatum im Format (YYMMDD) eingeben: ")
+    korrektesDatum:bool = False
+    while korrektesDatum == False:
+        if len(aufnahmedatum) != 6 or not aufnahmedatum.isdigit():
+            print("Das angegebene Datum entspricht nicht dem Foramt (YYMMDD)!")
+            aufnahmedatum = input("Aufnamedatum im Format (YYMMDD) eingeben: ")
+        else:
+            korrektesDatum = True
     return aufnahmedatum
 
 def einfuegenDatum(aufnahmedatum:str)->None:
