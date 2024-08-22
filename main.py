@@ -29,7 +29,7 @@ def aendernDatum(aufnamedatum:str)->None:
             f.rename(newFilename)
             
 if __name__=="__main__":
-    mudousauswahl:bool = True
+    modusauswahl:bool = True
     while modusauswahl:
         modus: str = input("Modus auswählen: 0 für Datum einfügen, 1 für Datum ändern: ")
         if modus == "0" or modus == "1":
@@ -41,9 +41,15 @@ if __name__=="__main__":
 
     if modus == "0":
         einfuegenDatum(aufnahmedatum)
-        os.chdir(os.getcwd()+"/PlainImages")
-        einfuegenDatum(aufnahmedatum)
+        try:
+            os.chdir(os.getcwd()+"/PlainImages")
+            einfuegenDatum(aufnahmedatum)
+        except FileNotFoundError:
+            print("Ordner PlainImages nicht gefunden!")
     if modus == "1":
         aendernDatum(aufnahmedatum)
-        os.chdir(os.getcwd()+"/PlainImages")
-        aendernDatum(aufnahmedatum)
+        try:
+            os.chdir(os.getcwd()+"/PlainImages")
+            aendernDatum(aufnahmedatum)
+        except FileNotFoundError:
+            print("Ordner PlainImages nicht gefunden!")
