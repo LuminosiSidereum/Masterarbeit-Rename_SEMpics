@@ -3,6 +3,11 @@ import sys
 from pathlib import Path
 
 def DatumEingeben()->str:
+    """
+    Prompts the user to enter a date in the format YYMMDD and validates the input.
+    Returns:
+    str: The entered date in the format YYMMDD.
+    """
     aufnahmedatum:str = input("Bitte geben Sie das Datum (YYMMDD), an dem die REM-Aufnahmen gemacht wurden, ein: ")
     korrektesDatum:bool = False
     while korrektesDatum == False:
@@ -14,6 +19,13 @@ def DatumEingeben()->str:
     return aufnahmedatum
 
 def einfuegenDatum(aufnahmedatum:str)->None:
+    """
+    Renames all .tif files in the current directory by inserting the specified aufnahmedatum in the filename.
+    Parameters:
+    aufnahmedatum (str): The date to be inserted in the filename.
+    Returns:
+    None
+    """
     directorycontent:list = os.listdir()
     for file in directorycontent:
         if file.endswith(".tif"):
@@ -23,6 +35,15 @@ def einfuegenDatum(aufnahmedatum:str)->None:
             f.rename(newFilename)
 
 def aendernDatum(aufnamedatum:str)->None:
+    """
+    Renames all files with the extension '.tif' in the current directory by replacing the fourth block of the filename with the given 'aufnamedatum'.
+
+    Parameters:
+    aufnamedatum (str): The new value for the fourth block of the filename.
+
+    Returns:
+    None
+    """
     directorycontent:list = os.listdir()
     for file in directorycontent:
         if file.endswith(".tif"):
