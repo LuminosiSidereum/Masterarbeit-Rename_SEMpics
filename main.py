@@ -19,7 +19,7 @@ def einfuegenDatum(aufnahmedatum:str)->None:
         if file.endswith(".tif"):
             f:Path = Path(file)
             name, extension = f.stem, f.suffix
-            newFilename:str = f"{name[0:11]}{aufnahmedatum}-{name[12:]}{extension}"
+            newFilename:str = f"{name[0:12]}{aufnahmedatum}-{name[12:]}{extension}"
             f.rename(newFilename)
 
 def aendernDatum(aufnamedatum:str)->None:
