@@ -31,8 +31,11 @@ def einfuegenDatum(aufnahmedatum:str)->None:
         if file.endswith(".tif"):
             f:Path = Path(file)
             name, extension = f.stem, f.suffix
-            newFilename:str = f"{name[0:12]}{aufnahmedatum}-{name[12:]}{extension}"
+            nameblocks:list[str] = name.split("-")
+            nameblocks.insert(3, aufnahmedatum)
+            newFilename:str = "-".join(nameblocks)+extension
             f.rename(newFilename)
+            print(f"Umbenannt: {file} -> {newFilename}")
 
 def aendernDatum(aufnamedatum:str)->None:
     """
@@ -53,7 +56,9 @@ def aendernDatum(aufnamedatum:str)->None:
             nameblocks[3] = aufnahmedatum
             newFilename:str = "-".join(nameblocks)+extension
             f.rename(newFilename)
-            
+            print(f"Umbenannt: {file} -> {newFilename}")
+
+# MARK: Main
 if __name__=="__main__":
     modusauswahl:bool = True
     while modusauswahl:
@@ -74,6 +79,7 @@ if __name__=="__main__":
     if modus == "0":
         einfuegenDatum(aufnahmedatum)
         try:
+            print("Versuche in den Ordner PlainImages zu wechseln...")
             os.chdir(os.getcwd()+"/PlainImages")
             einfuegenDatum(aufnahmedatum)
         except FileNotFoundError:
@@ -81,7 +87,9 @@ if __name__=="__main__":
     if modus == "1":
         aendernDatum(aufnahmedatum)
         try:
+            print("Versuche in den Ordner PlainImages zu wechseln...")
             os.chdir(os.getcwd()+"/PlainImages")
             aendernDatum(aufnahmedatum)
         except FileNotFoundError:
             print("Ordner PlainImages nicht gefunden!")
+    input("Drücken Sie eine Enter zum Beenden...")
